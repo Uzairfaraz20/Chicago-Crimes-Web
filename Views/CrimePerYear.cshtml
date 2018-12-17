@@ -1,0 +1,61 @@
+@page
+@model CrimesPerYearModel
+@{  
+  var Labels = Newtonsoft.Json.JsonConvert.SerializeObject(Model.YearList);
+  var Amounts = Newtonsoft.Json.JsonConvert.SerializeObject(Model.CrimesList);
+
+
+  ViewData["Title"] = "Crimes by Year";
+}  
+
+<h2>Crimes per Year </h2>  
+
+<br />
+
+<br />
+<br />
+
+@{
+   if (@Model.EX != null)
+	 {
+		 <h3>**ERROR: @Model.EX.Message</h3>
+		 <br />
+		 <hr />
+		 <br />
+		 <br />
+	 }
+}
+
+<div class="box-body">  
+  <div class="chart-container">  
+     <canvas id="myChart"></canvas>  
+  </div>  
+</div>  
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js">
+</script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>   
+
+<script>
+var ctx = document.getElementById("myChart");
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: @Html.Raw(Labels),
+        datasets: [{
+            label: "# of crimes",  
+            data: @Html.Raw(Amounts),
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>

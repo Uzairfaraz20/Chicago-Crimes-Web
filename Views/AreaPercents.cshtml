@@ -1,0 +1,92 @@
+@page
+@model AreaPercentsModel
+@{
+  ViewData["Title"] = "Percent Change of Crimes in an Area";
+}
+
+<h2>Percent Change Information for Area</h2>  
+
+
+<br />
+<h3>Area : "@Model.AreaName"</h3>
+<br />
+@{
+   if (@Model.EX != null)
+	 {
+		 <h3>**ERROR: @Model.EX.Message</h3>
+		 <br />
+		 <hr />
+		 <br />
+		 <br />
+	 }
+}
+
+<table class="table">  
+    <thead>  
+        <tr>  
+             
+			<th>  
+                IUCR Code
+            </th>  
+            <th>  
+                Crime Description 
+            </th> 
+            <th>  
+                Area Name
+            </th>  
+            <th>  
+                Max Year 
+            </th>  
+			<th>  
+                Max Year Crimes
+            </th>
+			<th>  
+                Min Year
+            </th>
+			<th>  
+                Min Year Crimes
+            </th>
+			<th>  
+                Percent Change
+            </th>
+        </tr>  
+    </thead>  
+    <tbody>  
+				@{
+				  
+				 }
+				
+        @foreach (var item in Model.CrimesList)  
+        {  
+            <tr>  
+                  
+				<td>  
+                    @item.IUCR
+                </td>  
+                <td>  
+                    @item.description
+                </td> 
+                <td>  
+                    @item.areaName
+                </td>  
+                <td>  
+                    @item.maxYear
+                </td> 
+				<td>  
+                    @item.maxYearTotal
+                </td> 
+				<td>  
+                    @item.minYear
+                </td>
+				<td>  
+                    @item.minYearTotal
+                </td>
+				<td>  
+                    @item.percentChange.ToString("0.00")
+                </td> 
+            </tr>  
+						
+						
+        }  
+    </tbody>  
+</table> 

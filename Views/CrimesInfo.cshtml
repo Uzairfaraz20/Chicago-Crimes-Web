@@ -1,0 +1,80 @@
+@page
+@model CrimesInfoModel
+@{
+  ViewData["Title"] = "Crime Information";
+}
+
+<h2>Crime Information for Area: "@Model.Input"</h2>  
+
+
+<br />
+<h3>Area : "@Model.AreaName"</h3>
+<br />
+@{
+   if (@Model.EX != null)
+	 {
+		 <h3>**ERROR: @Model.EX.Message</h3>
+		 <br />
+		 <hr />
+		 <br />
+		 <br />
+	 }
+}
+
+<table class="table">  
+    <thead>  
+        <tr>  
+            
+			<th>  
+                Rank
+            </th>  
+			<th>  
+                IUCR Code
+            </th>  
+            <th>  
+                Crime Description 
+            </th> 
+            <th>  
+                Total Crimes
+            </th>  
+            <th>  
+                Crime %
+            </th>  
+			<th>  
+                Arrest % 
+            </th>  
+        </tr>  
+    </thead>  
+    <tbody>  
+				@{
+				   int rank = 1;
+				 }
+				
+        @foreach (var item in Model.CrimesList)  
+        {  
+            <tr>  
+                <td>  
+					@rank
+                </td>  
+                
+				<td>  
+                    @item.IUCR
+                </td>  
+                <td>  
+                    @item.description
+                </td> 
+                <td>  
+                    @item.totalCrimes
+                </td>  
+                <td>  
+                    @item.percentTotal.ToString("0.00")
+                </td> 
+				<td>  
+                    @item.percentArrested.ToString("0.00")
+                </td> 
+            </tr>  
+						
+						rank++;
+        }  
+    </tbody>  
+</table> 
